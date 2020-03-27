@@ -33,25 +33,18 @@ public:
     Property(std::function<Get(void)> r, std::function<void(Set)> s):rf(r),sf(s){}
     ~Property(){}
 
-    /// Conversion operator
+    /// Conversion operator for getting
     template<class T = Get, typename = typename std::enable_if<!std::is_same<T,PropertyDisable>::value, void>::type>
     operator Get()
     {
         return rf();
     }
 
-    /// Assignment operator
-    template<class T = Set, typename = typename std::enable_if<!std::is_same<T,PropertyDisable>::value, void>::type>
-    void operator= (Set s)
+    /// Parenthesis operator for getting
+    template<class T = Get, typename = typename std::enable_if<!std::is_same<T,PropertyDisable>::value, void>::type>
+    Get operator()()
     {
-        sf(s);
-    }
-
-    /// Parenthesis operator
-    template<class T = Set, typename = typename std::enable_if<!std::is_same<T,PropertyDisable>::value, void>::type>
-    void operator() (Set s)
-    {
-        sf(s);
+        return rf();
     }
     
     /// Getter function
@@ -59,6 +52,20 @@ public:
     Get get()
     {
         return rf();
+    }
+
+    /// Assignment operator for setting
+    template<class T = Set, typename = typename std::enable_if<!std::is_same<T,PropertyDisable>::value, void>::type>
+    void operator= (Set s)
+    {
+        sf(s);
+    }
+
+    /// Parenthesis operator for setting
+    template<class T = Set, typename = typename std::enable_if<!std::is_same<T,PropertyDisable>::value, void>::type>
+    void operator() (Set s)
+    {
+        sf(s);
     }
 
     /// Setter function
