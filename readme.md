@@ -10,7 +10,9 @@ Simple system to achieve c# like property behaviour using lambdas.
 - With a property you can get:
     - Conversion operator
     - Assignment operator
-    - Overloaded parenthesis operator
+    - Overloaded parenthesis operator for get/set
+    - Overloaded arrow operator
     - Get function
     - Set function
+- Arrow operator works only if Get type is a pointer type
 - Requires c++11

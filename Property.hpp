@@ -46,6 +46,13 @@ public:
     {
         return rf();
     }
+
+    /// Arrow operator for getting
+    template<class T = Get, typename = typename std::enable_if<!std::is_same<T,PropertyDisable>::value && std::is_pointer<T>::value, void>::type>
+    Get operator->()
+    {
+        return rf();
+    }
     
     /// Getter function
     template<class T = Get, typename = typename std::enable_if<!std::is_same<T,PropertyDisable>::value, void>::type>
