@@ -31,6 +31,12 @@ class Property
 {
 public:
     Property(std::function<Get(void)> r, std::function<void(Set)> s):rf(r),sf(s){}
+
+    template<class T = Get, class S = Set, typename = typename std::enable_if<!std::is_same<T,PropertyDisable>::value && std::is_same<S,PropertyDisable>::value, void>::type>
+    Property(std::function<Get(void)> r):rf(r){}
+
+    template<class T = Get, class S = Set, typename = typename std::enable_if<std::is_same<T,PropertyDisable>::value && !std::is_same<S,PropertyDisable>::value, void>::type>
+    Property(std::function<void(Set)> s):sf(s){}
     ~Property(){}
 
     /// Conversion operator for getting

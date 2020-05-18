@@ -9,13 +9,11 @@ public:
 
     //Read-only property of type int
     Property<int,PropertyDisable> Value = Property<int,PropertyDisable>(
-        [&]{return _value;},
-        [](PropertyDisable){}
+        [&]{return _value;}
     );
 
     //Write-only property of type int
     Property<PropertyDisable,int> Index = Property<PropertyDisable,int>(
-        []{return PropertyDisable();},
         [&](int x){ _index = x;}
     );
 
