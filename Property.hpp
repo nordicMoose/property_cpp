@@ -77,7 +77,7 @@ public:
 
     /// Setter function
     template<class T = Set, typename = typename std::enable_if<!std::is_same<T,PropertyDisable>::value, void>::type>
-    Set set(Set s)
+    void set(Set s)
     {
         sf(s);
     }
